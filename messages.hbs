@@ -1,0 +1,206 @@
+
+  <div class="messaging col-lg-12 p-0" style="margin: 0 auto; padding: 0 !important; height: 80vh !important">
+    <div class="inbox_msg d-flex  gap-0" style="background-color: white; width:100% !important; height: 100%;">
+      <div class="inbox_people col-lg-5 m-0" style="position: relative;" >
+        <div class="headind_srch d-flex justify-content-between px-0" style="max-width: 100%;">
+
+          <div class="recent_heading mt-1" style="width: 55px;">
+            <h4 style="width: 100%;">Chats</h4>
+          </div>
+          
+            <div class="" style="width: 60%; position: relative;" >
+            <span><img  src="/js/extensions/img/search.png" alt="" srcset="" style="position: absolute; max-width:22px; max-height:22px; margin-top:.5em; margin-right:5px; right:0;"><input type="search" class="searchMsg" name="searchMsg" id="searchMsg" placeholder="search..." style="padding: 0px 4px; border-radius: 4px;  width: 100%; margin-top:4px"></span>
+            
+          </div>
+          <div id="refBtn" style="width:28px; height:28px; cursor: pointer; margin-top: 4px;">
+            <img src="/js/extensions/img/refresh-arrow.png" alt="" srcset="">
+          </div>
+          <style>
+            .searchMsg:focus {
+              outline: none;
+
+            }
+          </style>
+          
+          <div class="recent_heading w-auto" style="width: 15%;">
+            <button id="add-contact"  data-toggle="modal" data-target="#addcontact" ><img src="/img/add-friend.png" alt="add-user"></button>
+          </div>
+          <style>
+            .recent_heading img{
+              max-width: 28px;
+            }
+            button {
+              background-color: transparent;
+            }
+          </style>
+
+        </div>
+        <div class="inbox_chat" style="overflow-y: auto; height: 92%;">
+        </div>
+      </div>
+      <div class="mesgs" style="height: 100%; position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 10px !important;" >
+        <div class="msg_history w-100" style="overflow-x: hidden; height: 94%;">
+        </div>
+          <div id="emojiMenu" class="d-none" style=" width: 52.5%; height: 438px; position: absolute; z-index:1; bottom:0; margin-bottom:58px; border-radius:4px;"></div>
+          <div id="imgBox" style="display: none; max-width: 98%; max-height: 70%; position: relative; float: right;  border-radius:4px; border:1px solid black; z-index:1">
+            {{!-- <div class="imgAvatar" id="imgAvatar" style="display: none; max-width: 100%; max-height: 100%; z-index: 999;"></div> --}}
+            <img class="imgAvatar" id="imgAvatar" style="max-width:100%; max-height:100%; display: none;" />
+            <video class="videoAvatar" id="videoAvatar" controls width="100%" height="100%" style="max-width:100%; max-height:100%;display: none;"></video>
+            <audio  class="audioAvatar" id="audioAvatar" controls width="100%" height="100%" style="max-width:100%; max-height:100%; display: none; margin-top:35%; margin-left:15%"></audio>
+            <object id="fileObj" data="myfile.pdf" width="100%" height="100%" style="display: none; padding: 4px 8px; z-index: 2;">
+                <p id="fileName">Alternative text</p>
+            </object>
+            <span id="imgClose" style="position: absolute; right:0; top: 0; margin-right:10px;  z-index:2; background-color: white;  border-radius:4px; cursor:pointer">X</span>
+          </div>
+
+
+        <p class="time_date ml-1" style="font-size: 18px;  margin-top: -30px;  display: none;" id="info"></p>
+        <div class="type_msg " style="position: relative;">
+          <div class="input_msg_write d-flex">
+            <div id="mediaBody" class="d-none" style="background-color:#48B0F7c5; transition: transform .3s; position: absolute; margin-top:-4.2em; margin-left: 2px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:2px; border-radius:4px; width: 38px; ">
+                <label for="imageFile" style="cursor:pointer;"><i class="fa-solid fa-image fa-lg" id="imageChat" style="transition: transform .3s;"></i></label>
+                <input type="file" name="imageFile" id="imageFile" onchange="imageUploaded1()" accept="image/*,audio/*,video/*" style="display:none" multiple="multiple">
+                <div style="border-bottom:1px solid black; width:100%;"></div>
+                <label for="chatFile" style="cursor:pointer;"><i class="fa-solid fa-file fa-lg" id="fileChat" style="transition: transform .3s;"></i></label>
+                <input type="file" name="chatFile" onchange="fileUploaded()" id="chatFile" style="display:none" accept="application/*,text/*" multiple="multiple">
+            </div>
+            <div id="mediaBox" class="attachMenu" style="width: 50px; background-color: #48B0F7; border: 1px solid rgb(0,0,0,0.600); border-radius: 4px;  border-right: none; height: 48px; border-top-right-radius: 0; border-bottom-right-radius: 0; display: flex; justify-content: center; align-items: center; cursor:pointer;">
+                <i class="fa-solid fa-paperclip fa-lg" id="attach" style=" transition: transform .3s; "></i>
+            </div>
+            <div id="smile" style="width: 50px; background-color: #48B0F7; border: 1px solid rgb(0,0,0,0.600); border-right: none; border-left:1px solid rgb(0,0,0,0.250); height: 48px; border-top-right-radius: 0; border-bottom-right-radius: 0; display: flex; justify-content: center; align-items: center; cursor:pointer;">
+            </div>
+            <input type="text" id="{{userSingle._id}}msgInput" class="write_msg pl-2" placeholder="Type a message"
+              style="border: 1px solid rgb(0,0,0,0.600); font-weight: 600; border-radius: 4px; border-top-left-radius: 0; border-bottom-left-radius: 0;" />
+            <button class="msg_send_btn mr-2" id="{{userSingle._id}}msgSend" type="button" style="background-color: #48b0f7 !important;"><i
+                class="fa fa-paper-plane-o" style="" aria-hidden="true"></i></button>
+          </div>
+        </div>
+
+    </div>
+  </div>
+  <!--</div>-->
+
+
+  <!-- Add UserPage -->
+<div class="modal fade" id="addcontact" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add Contact</h5>
+          <div class="" style="position: relative;">
+            <span><img  src="/js/extensions/img/search.png" alt="" srcset="" style="position: absolute; max-width:22px; max-height:22px; margin-top:.4em; margin-right:5px; right:0;"><input class="searchMsg" type="search" name="searchMsg" id="searchMsg2" placeholder="search..." style="padding: 2px 4px; border-radius: 4px; margin-right: 3em; width:100%; resize: vertical;"></span>
+          </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"  style="height: 0;">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body d-flex flex-column justify-content-center align-items-center"
+          style="gap: 10px; padding: 10px 25px;">
+        <div class="inbox_chat2">
+        </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+  </div>
+</div>
+<style>
+  #root{
+    width: 52%;
+  }
+
+  /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px grey; 
+  border-radius: 5px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(27, 27, 27, 0.726); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(22, 22, 22, 0.726); 
+}
+
+em-emoji-picker> #preview {
+  display: none !important;
+  
+}
+
+ #attach:hover {
+   transform: scale(1.2);
+
+ }
+ #imageChat:hover {
+   transform: scale(1.2);
+ }
+ #fileChat:hover {
+   transform: scale(1.2);
+ }
+ #mediaBody> input {
+   display:none;
+ }
+ #mediaBody {
+    transition: all .5s;
+ }
+</style>
+
+{{!-- Pdf Style --}}
+<style>
+/* Add " (PDF)" text after links that go to PDFs */
+a[href$=".pdf"]:after { content: " (PDF)"; }
+
+/* If file size specified as data attribute, use that too */
+a[href$=".pdf"][data-size]:after { content: " (PDF, " attr(data-size) ")"; }
+</style>
+
+
+<script>
+
+  //console.log("userss",userss)
+</script>
+
+{{!-- <script type="module" src="/assets/data/filerobot-image-editor.js"></script>
+
+<script src="https://scaleflex.cloudimg.io/v7/plugins/filerobot-image-editor/latest/filerobot-image-editor.min.js"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
+<script>
+    const data = (data) => {
+    document.getElementById(userSingleStrr._id+'msgInput').value += data.native
+  }
+  const pickerOptions = { onEmojiSelect: data }
+  const picker = new EmojiMart.Picker(pickerOptions)
+
+
+  document.querySelector('#emojiMenu').appendChild(picker)
+ 
+
+  const emojiMenu = document.querySelector('#emojiMenu');
+  const smile = document.querySelector('#smile');
+   const mediaBody = document.querySelector("#mediaBody");
+
+  smile.addEventListener('click', () => {
+    emojiMenu.classList.toggle('d-none')
+    mediaBody.classList.add("d-none");
+  })
+
+$("#imgClose").click(function () {
+    $("#imgBox").css("display", "none");
+    $("#imgAvatar").css("display", "none");
+    $("#videoAvatar").css("display", "none");
+    $("#audioAvatar").css("display", "none");
+    $("#fileObj").css("display", "none");
+});
+
+
+</script>
